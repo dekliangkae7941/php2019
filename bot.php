@@ -42,11 +42,12 @@ $modex = file_get_contents('./user/' . $userId . 'mode.json');
 
 
 if ($modex == 'Normal') {
-    $uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec"; 
+    #$uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
+    $uri = "https://script.google.com/macros/s/AKfycbyldjsu6mMDl-V-0VH2wtXNbfBMS14I4SbAaF44aRfCL7S6TiQ/exec";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $results = array_filter($json['user'], function($user) use ($command) {
-    return $user['id'] == $command;
+    return $user['SITE'] == $command;
     }
   );
 
@@ -58,7 +59,7 @@ $i++;
 }
 
 
-$textz .= "กรุณาระบุชื่อที่ต้องการค้นหา";
+$textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 $textz .= "\n";
 $textz .= $bb['0']['name'];
 $textz .= "\n";
@@ -69,6 +70,8 @@ $textz .= "\n";
 $textz .= $bb['3']['name'];
 $textz .= "\n";
 $textz .= $bb['4']['name'];
+$textz .= "\n";
+$textz .= $bb['5']['name'];
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
@@ -89,7 +92,7 @@ elseif ($modex == 'keyword') {
     $deckey = json_decode($urikey, true);
 
     $results = array_filter($deckey, function($user) use ($command) {
-    return $user['name'] == $command;
+    return $user['SITE DONOR JOB'] == $command;
     }
   );
 
@@ -106,13 +109,35 @@ $enzz = json_encode($zaza);
 
 $text .= "result";
 $text .= "\n";
-$text .= $zaza[0][id];
-$text .= " - ";
-$text .= $zaza[0][name];
-$text .= " - ";
-$text .= $zaza[0][num];
-$text .= " - ";
-$text .= $zaza[0][other];
+$text .= $zaza[0]['SITE'];
+$text .= "\n";
+$text .= $zaza[0]['SITE DONOR JOB'];
+$text .= "\n";
+$text .= $zaza[0]['TEAM'];
+$text .= "\n";
+$text .= $zaza[0]['WBS'];
+$text .= "\n";
+$text .= $zaza[0]['BRAND OLT'];
+$text .= "\n";
+$text .= $zaza[0]['PON'];
+$text .= "\n";
+$text .= $zaza[0]['INSTALLATION DATE'];
+$text .= "\n";
+$text .= $zaza[0]['STATUS'];
+$text .= "\n";
+$text .= $zaza[0]['PHOTO ON WEB'];
+$text .= "\n";
+$text .= $zaza[0]['REMARK PHOTO'];
+$text .= "\n";
+$text .= $zaza[0]['STATUS PHOTO'];
+$text .= "\n";
+$text .= $zaza[0]['STATUS DOC'];
+$text .= "\n";
+$text .= $zaza[0]['REMARK'];
+$text .= "\n";
+$text .= $zaza[0]['SSR ID'];
+$text .= "\n";
+$text .= $zaza[0]['STATUS TPT'];
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
