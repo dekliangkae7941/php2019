@@ -58,14 +58,18 @@ $bb[$i] = $resultsz;
 $i++;
 }
 
-$site01 = $bb['0']['SITE DONOR JOB'];
-$site02 = $bb['1']['SITE DONOR JOB'];
-$site03 = $bb['2']['SITE DONOR JOB'];
-$site04 = $bb['3']['SITE DONOR JOB'];
-$site05 = $bb['4']['SITE DONOR JOB'];
+$site01 .= $bb['0']['SITE DONOR JOB'];
+$site02 .= $bb['1']['SITE DONOR JOB'];
+$site03 .= $bb['2']['SITE DONOR JOB'];
+$site04 .= $bb['3']['SITE DONOR JOB'];
 
-$textz = "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 
+
+$textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
+$textz .= "\n";
+$textz .= $bb['4']['SITE DONOR JOB'];
+$textz .= "\n";
+$textz .= $bb['5']['SITE DONOR JOB'];
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
@@ -87,6 +91,20 @@ $textz = "กรุณาระบุ SITE DONOR JOB ที่ต้องกา
                 'type' => 'message',
                 'label' => $site02,
                 'text' => $site02
+                                 )
+              ),array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site03,
+                'text' => $site03
+                                 )
+              ),array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site04,
+                'text' => $site04
                                  )
               )
                                 )
