@@ -61,17 +61,17 @@ $i++;
 
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 $textz .= "\n";
-$textz .= $bb['0']['SITE'];
+$textz .= $bb['0']['SITE DONOR JOB'];
 $textz .= "\n";
-$textz .= $bb['1']['SITE'];
+$textz .= $bb['1']['SITE DONOR JOB'];
 $textz .= "\n";
-$textz .= $bb['2']['SITE'];
+$textz .= $bb['2']['SITE DONOR JOB'];
 $textz .= "\n";
-$textz .= $bb['3']['SITE'];
+$textz .= $bb['3']['SITE DONOR JOB'];
 $textz .= "\n";
-$textz .= $bb['4']['SITE'];
+$textz .= $bb['4']['SITE DONOR JOB'];
 $textz .= "\n";
-$textz .= $bb['5']['SITE'];
+$textz .= $bb['5']['SITE DONOR JOB'];
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
