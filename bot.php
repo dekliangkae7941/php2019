@@ -58,24 +58,11 @@ $bb[$i] = $resultsz;
 $i++;
 }
 
-$site01 .= $bb['0']['SITE DONOR JOB'];
-$site02 .= $bb['1']['SITE DONOR JOB'];
-$site03 .= $bb['2']['SITE DONOR JOB'];
-$site04 .= $bb['3']['SITE DONOR JOB'];
-$site05 .= $bb['4']['SITE DONOR JOB'];
-
-if(empty($site02)) {
-  $site02 = 'test';
-}
-if(empty($site03)) {
-  $site03 = 'test';
-}
-if(empty($site04)) {
-  $site04 = 'test';
-}
-if(empty($site05)) {
-  $site05 = 'test';
-}
+$site01 = $bb['0']['SITE DONOR JOB'];
+$site02 = $bb['1']['SITE DONOR JOB'];
+$site03 = $bb['2']['SITE DONOR JOB'];
+$site04 = $bb['3']['SITE DONOR JOB'];
+$site05 = $bb['4']['SITE DONOR JOB'];
 
 $textz = "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 
