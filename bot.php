@@ -43,7 +43,7 @@ $modex = file_get_contents('./user/' . $userId . 'mode.json');
 
 if ($modex == 'Normal') {
     #$uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
-    $uri = "https://script.google.com/macros/s/AKfycbyldjsu6mMDl-V-0VH2wtXNbfBMS14I4SbAaF44aRfCL7S6TiQ/exec";
+    $uri = "https://script.google.com/macros/s/AKfycbwugQU30OsbDJQQXc9zW6fNfiWk2IKOr-L9CgOHfutDPCiiXdg/exec";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $results = array_filter($json['user'], function($user) use ($command) {
@@ -60,12 +60,10 @@ $i++;
 
 $site01 .= $bb['0']['SITE DONOR JOB'];
 $site02 .= $bb['1']['SITE DONOR JOB'];
+$site03 .= $bb['2']['SITE DONOR JOB'];
+$site04 .= $bb['3']['SITE DONOR JOB'];
 
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
-$textz .= "\n";
-$textz .= $bb['2']['SITE DONOR JOB'];
-$textz .= "\n";
-$textz .= $bb['3']['SITE DONOR JOB'];
 $textz .= "\n";
 $textz .= $bb['4']['SITE DONOR JOB'];
 $textz .= "\n";
@@ -91,6 +89,21 @@ $textz .= $bb['5']['SITE DONOR JOB'];
                 'type' => 'message',
                 'label' => $site02,
                 'text' => $site02
+                                 )
+              ),array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site03,
+                'text' => $site03
+                                 )
+              )
+              ,array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site04,
+                'text' => $site04
                                  )
               )
                                 )
