@@ -89,7 +89,7 @@ if(empty($site06)) {
 
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 
-if(empty($site01)) {
+if(empty($results)) {
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
