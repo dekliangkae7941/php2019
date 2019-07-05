@@ -43,7 +43,7 @@ $modex = file_get_contents('./user/' . $userId . 'mode.json');
 
 if ($modex == 'Normal') {
     #$uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
-    $uri = "https://script.google.com/macros/s/AKfycbwugQU30OsbDJQQXc9zW6fNfiWk2IKOr-L9CgOHfutDPCiiXdg/exec";
+    $uri = "https://itdev.win/test.json";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
     $results = array_filter($json['user'], function($user) use ($command) {
