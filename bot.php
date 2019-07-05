@@ -63,8 +63,19 @@ $site02 .= $bb['1']['SITE DONOR JOB'];
 $site03 .= $bb['2']['SITE DONOR JOB'];
 $site04 .= $bb['3']['SITE DONOR JOB'];
 $site05 .= $bb['4']['SITE DONOR JOB'];
-$site06 .= $bb['5']['SITE DONOR JOB'];
 
+if(empty($site02)) {
+  $site02 = 'test';
+}
+if(empty($site03)) {
+  $site03 = 'test';
+}
+if(empty($site04)) {
+  $site04 = 'test';
+}
+if(empty($site05)) {
+  $site05 = 'test';
+}
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 
     $mreply = array(
@@ -109,13 +120,6 @@ $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องก�
                 'type' => 'message',
                 'label' => $site05,
                 'text' => $site05
-                                 )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site06,
-                'text' => $site06
                                  )
               )
                                 )
