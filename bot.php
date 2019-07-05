@@ -43,12 +43,12 @@ $modex = file_get_contents('./user/' . $userId . 'mode.json');
 
 if ($modex == 'Normal') {
 
-    #$uri = "https://itdev.win/test";
-    #$urikey = file_get_contents($uri);
-    #$json = json_decode($urikey, true);
-    $uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
-    $response = Unirest\Request::get("$uri");
-    $json = json_decode($response->raw_body, true);
+    $uri = "https://itdev.win/test.json";
+    $urikey = file_get_contents($uri);
+    $json = json_decode($urikey, true);
+    #$uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
+    #$response = Unirest\Request::get("$uri");
+    #$json = json_decode($response->raw_body, true);
     $results = array_filter($json['user'], function($user) use ($command) {
     return $user['SITE'] == $command;
     }
