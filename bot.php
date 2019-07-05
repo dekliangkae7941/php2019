@@ -83,7 +83,23 @@ if(empty($site05)) {
 if(empty($site06)) {
   $site06 .= 'ไม่มีเพิ่มเติม';
 }
+
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
+
+if(empty($site01)) {
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array( 
+          array(
+                'type' => 'text',
+                'text' => 'ไม่พบข้อมูล'
+
+)
+        )
+      );
+    }
+else {
+
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
@@ -146,6 +162,7 @@ $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องก�
 $enbb = json_encode($bb);
     file_put_contents('./user/' . $userId . 'data.json', $enbb);
     file_put_contents('./user/' . $userId . 'mode.json', 'keyword');
+    }
 }
 
 elseif ($modex == 'keyword') {
