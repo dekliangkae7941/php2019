@@ -84,10 +84,6 @@ if(empty($site06)) {
   $site06 .= 'ไม่มีเพิ่มเติม';
 }
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
-$textz .= "\n";
-$textz .= $site05;
-$textz .= "\n";
-$textz .= $site06;
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
@@ -117,13 +113,28 @@ $textz .= $site06;
                 'label' => $site03,
                 'text' => $site03
                                  )
-              )
-              ,array(
+              ),array(
                 'type' => 'action',
                 'action' => array(
                 'type' => 'message',
                 'label' => $site04,
                 'text' => $site04
+                                 )
+              )
+              ,array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site05,
+                'text' => $site05
+                                 )
+              )
+              ,array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site06,
+                'text' => $site06
                                  )
               )
                                 )
