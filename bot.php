@@ -58,12 +58,10 @@ $bb[$i] = $resultsz;
 $i++;
 }
 
+$site01 .= $bb['0']['SITE DONOR JOB'];
+$site02 .= $bb['1']['SITE DONOR JOB'];
 
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
-$textz .= "\n";
-$textz .= $bb['0']['SITE DONOR JOB'];
-$textz .= "\n";
-$textz .= $bb['1']['SITE DONOR JOB'];
 $textz .= "\n";
 $textz .= $bb['2']['SITE DONOR JOB'];
 $textz .= "\n";
@@ -77,7 +75,26 @@ $textz .= $bb['5']['SITE DONOR JOB'];
         'messages' => array( 
           array(
                 'type' => 'text',
-                'text' => $textz
+                'text' => $textz,
+                'quickReply' => array(
+                'items' => array(
+                                   array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site01,
+                'text' => $site01
+                                 )
+              ),array(
+                'type' => 'action',
+                'action' => array(
+                'type' => 'message',
+                'label' => $site02,
+                'text' => $site02
+                                 )
+              )
+                                )
+                                     )
      )
      )
      );
