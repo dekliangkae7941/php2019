@@ -88,20 +88,6 @@ $textz = "กรุณาระบุ SITE DONOR JOB ที่ต้องกา
                 'label' => $site02,
                 'text' => $site02
                                  )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site03,
-                'text' => $site03
-                                 )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site04,
-                'text' => $site04
-                                 )
               )
                                 )
                                      )
