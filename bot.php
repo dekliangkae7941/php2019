@@ -76,7 +76,8 @@ if(empty($site04)) {
 if(empty($site05)) {
   $site05 = 'test';
 }
-$textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
+
+$textz = "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 
     $mreply = array(
         'replyToken' => $replyToken,
@@ -113,13 +114,6 @@ $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องก�
                 'type' => 'message',
                 'label' => $site04,
                 'text' => $site04
-                                 )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site05,
-                'text' => $site05
                                  )
               )
                                 )
