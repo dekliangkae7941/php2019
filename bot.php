@@ -62,12 +62,32 @@ $site01 .= $bb['0']['SITE DONOR JOB'];
 $site02 .= $bb['1']['SITE DONOR JOB'];
 $site03 .= $bb['2']['SITE DONOR JOB'];
 $site04 .= $bb['3']['SITE DONOR JOB'];
+$site05 .= $bb['4']['SITE DONOR JOB'];
+$site06 .= $bb['5']['SITE DONOR JOB'];
 
+if(empty($site01)) {
+  $site01 .= 'ไม่มีเพิ่มเติม';
+}
+if(empty($site02)) {
+  $site02 .= 'ไม่มีเพิ่มเติม';
+}
+if(empty($site03)) {
+  $site03 .= 'ไม่มีเพิ่มเติม';
+}
+if(empty($site04)) {
+  $site04 .= 'ไม่มีเพิ่มเติม';
+}
+if(empty($site05)) {
+  $site05 .= 'ไม่มีเพิ่มเติม';
+}
+if(empty($site06)) {
+  $site06 .= 'ไม่มีเพิ่มเติม';
+}
 $textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
 $textz .= "\n";
-$textz .= $bb['4']['SITE DONOR JOB'];
+$textz .= $site05;
 $textz .= "\n";
-$textz .= $bb['5']['SITE DONOR JOB'];
+$textz .= $site06;
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
