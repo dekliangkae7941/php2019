@@ -60,7 +60,8 @@ file_put_contents($fileFullSavePath,$result);
             array(
                 'type' => 'text',
                 'text' => $text
-            )            array(
+            ),
+            array(
                 'type' => 'image',
                 'originalContentUrl' => $picurl,
                 'previewImageUrl' => $picurl
@@ -166,7 +167,6 @@ array(
 
 
 else {
-        
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
@@ -189,9 +189,6 @@ else {
                     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
                     $result = curl_exec( $ch );
                     curl_close( $ch );
-
-
-
 }
 
 
