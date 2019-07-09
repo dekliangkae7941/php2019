@@ -194,7 +194,6 @@ elseif ($msg_type == 'location') {
         )
     );
 }
-}
 
 
 else {
