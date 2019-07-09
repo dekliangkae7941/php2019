@@ -42,15 +42,11 @@ $modex = file_get_contents('./user/' . $userId . 'mode.json');
 
 
 if ($modex == 'Normal') {
-
-    $uri = "https://itdev.win/test.json";
-    $urikey = file_get_contents($uri);
-    $json = json_decode($urikey, true);
-    #$uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
-    #$response = Unirest\Request::get("$uri");
-    #$json = json_decode($response->raw_body, true);
+    $uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
     $results = array_filter($json['user'], function($user) use ($command) {
-    return $user['SITE'] == $command;
+    return $user['id'] == $command;
     }
   );
 
@@ -61,12 +57,12 @@ $bb[$i] = $resultsz;
 $i++;
 }
 
-$site01 .= $bb['0']['SITE DONOR JOB'];
-$site02 .= $bb['1']['SITE DONOR JOB'];
-$site03 .= $bb['2']['SITE DONOR JOB'];
-$site04 .= $bb['3']['SITE DONOR JOB'];
-$site05 .= $bb['4']['SITE DONOR JOB'];
-$site06 .= $bb['5']['SITE DONOR JOB'];
+$site01 .= $bb['0']['name'];
+$site02 .= $bb['1']['name'];
+$site03 .= $bb['2']['name'];
+$site04 .= $bb['3']['name'];
+$site05 .= $bb['4']['name'];
+$site06 .= $bb['5']['name'];
 
 if(empty($site01)) {
   $site01 .= 'ไม่มีเพิ่มเติม';
@@ -87,7 +83,7 @@ if(empty($site06)) {
   $site06 .= 'ไม่มีเพิ่มเติม';
 }
 
-$textz .= "กรุณาระบุ SITE DONOR JOB ที่ต้องการค้นหา";
+$textz .= "กรุณาระบุ Name ที่ต้องการค้นหา";
 
 if(empty($results)) {
       $mreply = array(
@@ -187,35 +183,13 @@ $i++;
 
 $enzz = json_encode($zaza);
     file_put_contents('./user/' . $userId . 'data.json', $enzz);
-$text .= 'SITE : ' . $zaza[0]['SITE'];
+$text .= 'ID : ' . $zaza[0]['id'];
 $text .= "\n";
-$text .= 'SITE DONOR JOB : ' . $zaza[0]['SITE DONOR JOB'];
+$text .= 'NAME : ' . $zaza[0]['name'];
 $text .= "\n";
-$text .= 'TEAM : ' . $zaza[0]['TEAM'];
+$text .= 'NUM : ' . $zaza[0]['num'];
 $text .= "\n";
-$text .= 'WBS : ' . $zaza[0]['WBS'];
-$text .= "\n";
-$text .= 'BRAND OLT : ' . $zaza[0]['BRAND OLT'];
-$text .= "\n";
-$text .= 'PON : ' . $zaza[0]['PON'];
-$text .= "\n";
-$text .= 'INSTALLATION DATE : ' . $zaza[0]['INSTALLATION DATE'];
-$text .= "\n";
-$text .= 'STATUS : ' . $zaza[0]['STATUS'];
-$text .= "\n";
-$text .= 'PHOTO ON WEB : ' . $zaza[0]['PHOTO ON WEB'];
-$text .= "\n";
-$text .= 'REMARK PHOTO : ' . $zaza[0]['REMARK PHOTO'];
-$text .= "\n";
-$text .= 'STATUS PHOTO : ' . $zaza[0]['STATUS PHOTO'];
-$text .= "\n";
-$text .= 'STATUS DOC : ' . $zaza[0]['STATUS DOC'];
-$text .= "\n";
-$text .= 'REMARK : ' . $zaza[0]['REMARK'];
-$text .= "\n";
-$text .= 'SSR ID : ' . $zaza[0]['SSR ID'];
-$text .= "\n";
-$text .= 'STATUS TPT : ' . $zaza[0]['STATUS TPT'];
+$text .= 'OTHER : ' . $zaza[0]['other'];
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array( 
