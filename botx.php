@@ -22,8 +22,10 @@ $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
-
-
+#----Check title empty----#
+if (empty($msg_title)) {
+    $msg_title = 'ที่ไหนก็ได้ โตแล้ว';
+}
 #----command option----#
 $usertext = explode(" ", $message['text']);
 $command = $usertext[0];
@@ -34,176 +36,162 @@ if (count($usertext) > 2) {
         $options .= $explode[$i];
     }
 }
-
-#------------------------------------------
-
-
-$modex = file_get_contents('./user/' . $userId . 'mode.json');
-
-
-if ($modex == 'Normal') {
-    $uri = "https://script.google.com/macros/s/AKfycbzw_YL6MhrETxrBEgIu9cMqTZ8DrlUXVwCYhvHZeaXtUE50L_cB/exec";
-    $response = Unirest\Request::get("$uri");
-    $json = json_decode($response->raw_body, true);
-    $results = array_filter($json['user'], function($user) use ($command) {
-    return $user['id'] == $command;
-    }
-  );
-
-$i=0;
-$bb = array();
-foreach($results as $resultsz){
-$bb[$i] = $resultsz;
-$i++;
-}
-
-$site01 .= $bb['0']['name'];
-$site02 .= $bb['1']['name'];
-$site03 .= $bb['2']['name'];
-$site04 .= $bb['3']['name'];
-$site05 .= $bb['4']['name'];
-$site06 .= $bb['5']['name'];
-
-if(empty($site01)) {
-  $site01 .= 'ไม่มีเพิ่มเติม';
-}
-if(empty($site02)) {
-  $site02 .= 'ไม่มีเพิ่มเติม';
-}
-if(empty($site03)) {
-  $site03 .= 'ไม่มีเพิ่มเติม';
-}
-if(empty($site04)) {
-  $site04 .= 'ไม่มีเพิ่มเติม';
-}
-if(empty($site05)) {
-  $site05 .= 'ไม่มีเพิ่มเติม';
-}
-if(empty($site06)) {
-  $site06 .= 'ไม่มีเพิ่มเติม';
-}
-
-$textz .= "กรุณาระบุ Name ที่ต้องการค้นหา";
-
-if(empty($results)) {
-   #   $mreply = array(
-   #     'replyToken' => $replyToken,
-   #     'messages' => array( 
-   #       array(
-   #             'type' => 'text',
-    #            'text' => 'ไม่พบข้อมูล'
-#)
-    #    )
-    #  );
-    }
-else {
-
-    $mreply = array(
+#----command option----#
+$remsg = json_encode($message, true);
+$remsg1 = json_decode($remsg, true);
+$remsg2 = $remsg1['text'];
+$stickerId = $remsg1['stickerId'];
+$reline = json_encode($profile, true);
+$reline1 = json_decode($reline, true);
+$reline2 = $reline1['displayName'];
+#-------------------------[MSG TYPE]-------------------------#
+if ($msg_type == 'image') {
+$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("YmdHis");
+$botDataUserFolder = './user/file/image/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
+$picurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์รูปภาพเรียบร้อยแล้ว";
+      $mreply = array(
         'replyToken' => $replyToken,
-        'messages' => array( 
-          array(
-                'type' => 'text',
-                'text' => $textz,
-                'quickReply' => array(
-                'items' => array(
-                                   array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site01,
-                'text' => $site01
-                                 )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site02,
-                'text' => $site02
-                                 )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site03,
-                'text' => $site03
-                                 )
-              ),array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site04,
-                'text' => $site04
-                                 )
-              )
-              ,array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site05,
-                'text' => $site05
-                                 )
-              )
-              ,array(
-                'type' => 'action',
-                'action' => array(
-                'type' => 'message',
-                'label' => $site06,
-                'text' => $site06
-                                 )
-              )
-                                )
-                                     )
-     )
-     )
-     );
-
-$enbb = json_encode($bb);
-    file_put_contents('./user/' . $userId . 'data.json', $enbb);
-    file_put_contents('./user/' . $userId . 'mode.json', 'keyword');
-    }
-}
-
-elseif ($modex == 'keyword') {
-    $urikey = file_get_contents('./user/' . $userId . 'data.json');
-    $deckey = json_decode($urikey, true);
-
-    $results = array_filter($deckey, function($user) use ($command) {
-    return $user['name'] == $command;
-    }
-  );
-
-
-$i=0;
-$zaza = array();
-foreach($results as $resultsz){
-$zaza[$i] = $resultsz;
-$i++;
-}
-
-$enzz = json_encode($zaza);
-    file_put_contents('./user/' . $userId . 'data.json', $enzz);
-$text .= 'ID : ' . $zaza[0]['id'];
-$text .= "\n";
-$text .= 'NAME : ' . $zaza[0]['name'];
-$text .= "\n";
-$text .= 'NUM : ' . $zaza[0]['num'];
-$text .= "\n";
-$text .= 'OTHER : ' . $zaza[0]['other'];
-    $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array( 
-          array(
+        'messages' => array(
+            array(
                 'type' => 'text',
                 'text' => $text
-     )
-     )
-     );
-
-    file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
+            ),
+            array(
+                'type' => 'text',
+                'text' => $picurl
+            )
+        )
+    );
 }
-    else {
-        
-                    file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
+elseif ($msg_type == 'video') {
+  $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("YmdHis");
+$botDataUserFolder = './user/file/video/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
+$vidurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            ),
+            array(
+                'type' => 'text',
+                'text' => $vidurl
+            )
+        )
+    );
+}
+elseif ($msg_type == 'audio') {
+  $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("YmdHis");
+$botDataUserFolder = './user/file/audio/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
+$audurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์เสียงเรียบร้อยแล้ว";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            ),
+            array(
+                'type' => 'text',
+                'text' => $audurl
+            )
+        )
+    );
+}
+elseif ($msg_type == 'sticker') {
+  $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+          
+array(
+        'type' => 'flex',
+        'altText' => 'Sticker!!',
+        'contents' => array(
+        'type' => 'bubble',
+        'body' => array(
+          'type' => 'box',
+          'layout' => 'vertical',
+          'spacing' => 'md',
+          'contents' => array(
+            array(
+              'type' => 'text',
+          'align' => 'center',
+          'color' => '#049b1b',
+          'text' => 'USER : ' . $reline2
+      ),
+            array(
+          'type' => 'image',
+          'size' => '5xl',
+          'align' => 'center',
+          'url' => $stickerurl
+      )
+        )
+        )
+        )
+        )
+    )
+    );
+}
+elseif ($msg_type == 'location') {
+      $text = "Reply location";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'location',
+                'title' => $msg_title,
+                'address' => $msg_address,
+                'latitude' => $msg_latitude,
+                'longitude' => $msg_longitude
+            )
+        )
+    );
+}
+else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
@@ -226,16 +214,9 @@ $text .= 'OTHER : ' . $zaza[0]['other'];
                     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
                     $result = curl_exec( $ch );
                     curl_close( $ch );
-        }
-
-
-
-
-
-
+}
 if (isset($mreply)) {
     $result = json_encode($mreply);
     $client->replyMessage($mreply);
 }  
-
 ?>
