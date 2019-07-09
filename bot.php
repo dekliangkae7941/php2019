@@ -33,7 +33,8 @@ if (count($usertext) > 2) {
     }
 }
 #----command option----#
-
+                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
+                    file_put_contents('body.txt',file_get_contents('php://input'));
 #-------------------------[MSG TYPE]-------------------------#
 
 if ($msg_type == 'image') {
@@ -46,7 +47,7 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
 $ran = date("H:i:s");
-$botDataUserFolder = './user/file/image/' . $userId;
+$botDataUserFolder = '/user/file/image/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
                     } 
@@ -84,12 +85,16 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
 $ran = date("H:i:s");
-$botDataUserFolder = './user/file/video/' . $userId;
+$botDataUserFolder = '/user/file/video/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
+$fileFullSavePathp = $botDataUserFolder . '/' . $ran . '.jpg';
+$vidurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+$pvidurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePathp;
 file_put_contents($fileFullSavePath,$result);
+file_put_contents($fileFullSavePathp,$result);
   $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
       $mreply = array(
         'replyToken' => $replyToken,
@@ -97,6 +102,15 @@ file_put_contents($fileFullSavePath,$result);
             array(
                 'type' => 'text',
                 'text' => $text
+            ),
+            array(
+                'type' => 'text',
+                'text' => $vidurl
+            ),
+            array(
+                'type' => 'image',
+                'originalContentUrl' => $vidurl,
+                'previewImageUrl' => $pvidurl
             )
         )
     );
@@ -112,7 +126,7 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
 $ran = date("H:i:s");
-$botDataUserFolder = './user/file/audio/' . $userId;
+$botDataUserFolder = '/user/file/audio/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
                     } 
@@ -173,8 +187,6 @@ array(
 else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
-                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
-                    file_put_contents('body.txt',file_get_contents('php://input'));
                     $headers['Host'] = "bots.dialogflow.com";
                     $json_headers = array();
                     foreach($headers as $k=>$v){
