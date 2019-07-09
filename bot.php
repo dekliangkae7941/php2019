@@ -62,6 +62,10 @@ file_put_contents($fileFullSavePath,$result);
                 'text' => $text
             ),
             array(
+                'type' => 'text',
+                'text' => $picurl
+            ),
+            array(
                 'type' => 'image',
                 'originalContentUrl' => $picurl,
                 'previewImageUrl' => $picurl
