@@ -22,6 +22,10 @@ $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
+#----Check title empty----#
+if (isset($msg_title)) {
+    $msg_title = 'ที่ไหนก็ได้ โตแล้ว';
+}
 #----command option----#
 $usertext = explode(" ", $message['text']);
 $command = $usertext[0];
