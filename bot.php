@@ -37,12 +37,10 @@ $remsg = json_encode($message, true);
 $remsg1 = json_decode($remsg, true);
 $remsg2 = $remsg1['text'];
 $stickerId = $remsg1['stickerId'];
-
 $reline = json_encode($profile, true);
 $reline1 = json_decode($reline, true);
 $reline2 = $reline1['displayName'];
 #-------------------------[MSG TYPE]-------------------------#
-
 if ($msg_type == 'image') {
 $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 $headers = array('Authorization: Bearer ' . $channelAccessToken);
@@ -75,7 +73,6 @@ file_put_contents($fileFullSavePath,$result);
         )
     );
 }
-
 elseif ($msg_type == 'video') {
   $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 $headers = array('Authorization: Bearer ' . $channelAccessToken);
@@ -108,7 +105,6 @@ file_put_contents($fileFullSavePath,$result);
         )
     );
 }
-
 elseif ($msg_type == 'audio') {
   $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 $headers = array('Authorization: Bearer ' . $channelAccessToken);
@@ -141,7 +137,6 @@ file_put_contents($fileFullSavePath,$result);
         )
     );
 }
-
 elseif ($msg_type == 'sticker') {
   $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
       $mreply = array(
@@ -174,18 +169,16 @@ array(
         )
         )
         )
-
     )
     );
 }
-
 elseif ($msg_type == 'location') {
       $text = "Reply location";
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
-                'type' => 'text',
+                'type' => 'location',
                 'title' => $msg_title,
                 'address' => $msg_address,
                 'latitude' => $msg_latitude,
@@ -194,8 +187,6 @@ elseif ($msg_type == 'location') {
         )
     );
 }
-
-
 else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
@@ -220,11 +211,8 @@ else {
                     $result = curl_exec( $ch );
                     curl_close( $ch );
 }
-
-
 if (isset($mreply)) {
     $result = json_encode($mreply);
     $client->replyMessage($mreply);
 }  
-
 ?>
