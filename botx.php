@@ -26,6 +26,7 @@ $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
 if (empty($msg_title)) {
     $msg_title = 'ที่ไหนก็ได้ โตแล้ว';
 }
+file_put_contents('bodyx.txt',file_get_contents('php://input'));
 #----command option----#
 $usertext = explode(" ", $message['text']);
 $command = $usertext[0];
