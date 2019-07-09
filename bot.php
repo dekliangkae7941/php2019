@@ -169,7 +169,7 @@ elseif ($modex == 'keyword') {
     $deckey = json_decode($urikey, true);
 
     $results = array_filter($deckey, function($user) use ($command) {
-    return $user['SITE DONOR JOB'] == $command;
+    return $user['name'] == $command;
     }
   );
 
@@ -202,9 +202,43 @@ $text .= 'OTHER : ' . $zaza[0]['other'];
 
     file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
 }
-else {
-  file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
-}
+    else {
+        
+          file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
+            $userMessage = $msg_message; // เก็บค่าข้อความที่ผู้ใช้พิมพ์
+            switch($userMessage){
+                case     "test":
+                    $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";                 
+                    break;
+                default:
+                    $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
+                    $headers = getallheaders();
+                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
+                    file_put_contents('body.txt',file_get_contents('php://input'));
+                    $headers['Host'] = "bots.dialogflow.com";
+                    $json_headers = array();
+                    foreach($headers as $k=>$v){
+                        $json_headers[]=$k.":".$v;
+                    }
+                    $inputJSON = file_get_contents('php://input');
+                    // ส่วนของการส่งการแจ้งเตือนผ่านฟังก์ชั่น cURL
+                    $ch = curl_init();
+                    curl_setopt( $ch, CURLOPT_URL, $url);
+                    curl_setopt( $ch, CURLOPT_POST, 1);
+                    curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true);
+                    curl_setopt( $ch, CURLOPT_POSTFIELDS, $inputJSON);
+                    curl_setopt( $ch, CURLOPT_HTTPHEADER, $json_headers);
+                    curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2);
+                    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1); 
+                    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+                    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+                    $result = curl_exec( $ch );
+                    curl_close( $ch );
+                    exit;               
+                    break;
+            }
+        }
+
 
 
 
