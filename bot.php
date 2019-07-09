@@ -52,7 +52,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
-$ran = date("H:i:s");
+$ran = date("YmdHis");
 $botDataUserFolder = './user/file/image/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
@@ -85,7 +85,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
-$ran = date("H:i");
+$ran = date("YmdHis");
 $botDataUserFolder = './user/file/video/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
@@ -118,7 +118,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
-$ran = date("H:i:s");
+$ran = date("YmdHis");
 $botDataUserFolder = './user/file/audio/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
