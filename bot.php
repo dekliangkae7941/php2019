@@ -179,7 +179,22 @@ array(
     );
 }
 
-
+elseif ($msg_type == 'location') {
+      $text = "Reply location";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'title' => $msg_title,
+                'address' => $msg_address,
+                'latitude' => $msg_latitude,
+                'longitude' => $msg_longitude
+            )
+        )
+    );
+}
+}
 
 
 else {
