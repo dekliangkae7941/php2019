@@ -22,8 +22,6 @@ $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
-
-
 #----command option----#
 $usertext = explode(" ", $message['text']);
 $command = $usertext[0];
@@ -34,12 +32,141 @@ if (count($usertext) > 2) {
         $options .= $explode[$i];
     }
 }
+#----command option----#
 
-#------------------------------------------
+#-------------------------[MSG TYPE]-------------------------#
+
+if ($msg_type == 'image') {
+$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("H:i:s");
+$botDataUserFolder = './user/file/image/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
+$picurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์รูปภาพเรียบร้อยแล้ว";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )            array(
+                'type' => 'image',
+                'originalContentUrl' => $picurl,
+                'previewImageUrl' => $picurl
+            )
+        )
+    );
+}
+
+elseif ($msg_type == 'video') {
+  $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("H:i:s");
+$botDataUserFolder = './user/file/video/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+
+elseif ($msg_type == 'audio') {
+  $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("H:i:s");
+$botDataUserFolder = './user/file/audio/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์เสียงเรียบร้อยแล้ว";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+
+elseif ($msg_type == 'sticker') {
+  $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+          
+array(
+        'type' => 'flex',
+        'altText' => 'Sticker!!',
+        'contents' => array(
+        'type' => 'bubble',
+        'body' => array(
+          'type' => 'box',
+          'layout' => 'vertical',
+          'spacing' => 'md',
+          'contents' => array(
+            array(
+              'type' => 'text',
+          'align' => 'center',
+          'color' => '#049b1b',
+          'text' => 'USER : ' . $reline2
+      ),
+            array(
+          'type' => 'image',
+          'size' => '5xl',
+          'align' => 'center',
+          'url' => $stickerurl
+      )
+        )
+        )
+        )
+        )
+
+    )
+    );
+}
 
 
+
+
+else {
         
-                    file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
@@ -65,7 +192,7 @@ if (count($usertext) > 2) {
 
 
 
-
+}
 
 
 if (isset($mreply)) {
