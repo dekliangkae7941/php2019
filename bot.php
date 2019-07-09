@@ -53,7 +53,7 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
 $ran = date("H:i:s");
-$botDataUserFolder = '/user/file/image/' . $userId;
+$botDataUserFolder = './user/file/image/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
                     } 
