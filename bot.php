@@ -33,8 +33,14 @@ if (count($usertext) > 2) {
     }
 }
 #----command option----#
-                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
-                    file_put_contents('body.txt',file_get_contents('php://input'));
+$remsg = json_encode($message, true);
+$remsg1 = json_decode($remsg, true);
+$remsg2 = $remsg1['text'];
+$stickerId = $remsg1['stickerId'];
+
+$reline = json_encode($profile, true);
+$reline1 = json_decode($reline, true);
+$reline2 = $reline1['displayName'];
 #-------------------------[MSG TYPE]-------------------------#
 
 if ($msg_type == 'image') {
@@ -90,11 +96,8 @@ $botDataUserFolder = '/user/file/video/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
-$fileFullSavePathp = $botDataUserFolder . '/' . $ran . '.jpg';
 $vidurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
-$pvidurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePathp;
 file_put_contents($fileFullSavePath,$result);
-file_put_contents($fileFullSavePathp,$result);
   $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
       $mreply = array(
         'replyToken' => $replyToken,
@@ -106,11 +109,6 @@ file_put_contents($fileFullSavePathp,$result);
             array(
                 'type' => 'text',
                 'text' => $vidurl
-            ),
-            array(
-                'type' => 'image',
-                'originalContentUrl' => $vidurl,
-                'previewImageUrl' => $pvidurl
             )
         )
     );
@@ -187,6 +185,8 @@ array(
 else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
+                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
+                    file_put_contents('body.txt',file_get_contents('php://input'));
                     $headers['Host'] = "bots.dialogflow.com";
                     $json_headers = array();
                     foreach($headers as $k=>$v){
