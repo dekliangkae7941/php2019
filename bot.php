@@ -23,7 +23,7 @@ $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
 #----Check title empty----#
-if (isset($msg_title)) {
+if (empty($msg_title)) {
     $msg_title = 'ที่ไหนก็ได้ โตแล้ว';
 }
 #----command option----#
