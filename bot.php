@@ -124,6 +124,7 @@ $botDataUserFolder = './user/file/audio/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
+$audurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เสียงเรียบร้อยแล้ว";
       $mreply = array(
@@ -132,6 +133,10 @@ file_put_contents($fileFullSavePath,$result);
             array(
                 'type' => 'text',
                 'text' => $text
+            ),
+            array(
+                'type' => 'text',
+                'text' => $audurl
             )
         )
     );
