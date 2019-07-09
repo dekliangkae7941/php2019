@@ -71,11 +71,6 @@ file_put_contents($fileFullSavePath,$result);
             array(
                 'type' => 'text',
                 'text' => $picurl
-            ),
-            array(
-                'type' => 'image',
-                'originalContentUrl' => $picurl,
-                'previewImageUrl' => $picurl
             )
         )
     );
@@ -90,7 +85,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
-$ran = date("H:i:s");
+$ran = date("H:i");
 $botDataUserFolder = './user/file/video/' . $userId;
                     if(!file_exists($botDataUserFolder)) {
                         mkdir($botDataUserFolder, 0777, true);
