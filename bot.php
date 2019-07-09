@@ -86,16 +86,15 @@ if(empty($site06)) {
 $textz .= "กรุณาระบุ Name ที่ต้องการค้นหา";
 
 if(empty($results)) {
-      $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array( 
-          array(
-                'type' => 'text',
-                'text' => 'ไม่พบข้อมูล'
-
-)
-        )
-      );
+   #   $mreply = array(
+   #     'replyToken' => $replyToken,
+   #     'messages' => array( 
+   #       array(
+   #             'type' => 'text',
+    #            'text' => 'ไม่พบข้อมูล'
+#)
+    #    )
+    #  );
     }
 else {
 
@@ -204,13 +203,7 @@ $text .= 'OTHER : ' . $zaza[0]['other'];
 }
     else {
         
-          file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
-            $userMessage = $msg_message; // เก็บค่าข้อความที่ผู้ใช้พิมพ์
-            switch($userMessage){
-                case     "test":
-                    $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";                 
-                    break;
-                default:
+                    file_put_contents('./user/' . $userId . 'mode.json', 'Normal');
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
@@ -221,7 +214,6 @@ $text .= 'OTHER : ' . $zaza[0]['other'];
                         $json_headers[]=$k.":".$v;
                     }
                     $inputJSON = file_get_contents('php://input');
-                    // ส่วนของการส่งการแจ้งเตือนผ่านฟังก์ชั่น cURL
                     $ch = curl_init();
                     curl_setopt( $ch, CURLOPT_URL, $url);
                     curl_setopt( $ch, CURLOPT_POST, 1);
@@ -234,9 +226,6 @@ $text .= 'OTHER : ' . $zaza[0]['other'];
                     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
                     $result = curl_exec( $ch );
                     curl_close( $ch );
-                    exit;               
-                    break;
-            }
         }
 
 
