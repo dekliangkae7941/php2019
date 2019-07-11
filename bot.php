@@ -314,8 +314,8 @@ else {
 if (isset($mreply)) {
     $result = json_encode($mreply);
     $client->replyMessage($mreply);
-    file_put_contents('log.txt',file_get_contents('php://input'));
 }  
+    file_put_contents('log.txt',file_get_contents('php://input'));
 ?>
 
     
