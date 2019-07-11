@@ -321,6 +321,22 @@ elseif ($msg_type == 'location') {
     );
 
 }
+
+else { 
+
+if ($command== 'myid') { 
+
+  $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $userid
+            )
+        )
+    );
+}
+
 else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
@@ -344,6 +360,7 @@ else {
                     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
                     $result = curl_exec( $ch );
                     curl_close( $ch );
+}
 }
 if (isset($mreply)) {
     $result = json_encode($mreply);
