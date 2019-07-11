@@ -17,6 +17,7 @@ $profile    = $client->profil($userId);
 $repro = json_encode($profile);
 $messageid  = $client->parseEvents()[0]['message']['id'];
 $msg_type      = $client->parseEvents()[0]['message']['type'];
+$msg_file      = $client->parseEvents()[0]['message']['fileName'];
 $msg_message   = $client->parseEvents()[0]['message']['text'];
 $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
@@ -123,6 +124,39 @@ elseif ($type == 'unfollow') {
     );
 }
 #-------------------------[MSG TYPE]-------------------------#
+elseif ($msg_type == 'file') {
+$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+$headers = array('Authorization: Bearer ' . $channelAccessToken);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$result = curl_exec($ch);
+curl_close($ch);
+$ran = date("YmdHis");
+$botDataUserFolder = './user/file/file/' . $userId;
+                    if(!file_exists($botDataUserFolder)) {
+                        mkdir($botDataUserFolder, 0777, true);
+                    } 
+$fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
+$picurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+file_put_contents($fileFullSavePath,$result);
+  $text = "บันทึกไฟล์เรียบร้อยแล้ว";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            ),
+            array(
+                'type' => 'text',
+                'text' => $picurl
+            )
+        )
+    );
+}
+
 elseif ($msg_type == 'image') {
 $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 $headers = array('Authorization: Bearer ' . $channelAccessToken);
