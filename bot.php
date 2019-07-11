@@ -44,8 +44,86 @@ $stickerId = $remsg1['stickerId'];
 $reline = json_encode($profile, true);
 $reline1 = json_decode($reline, true);
 $reline2 = $reline1['displayName'];
+
+
+
+
+
+#-------------------------[EVENT TYPE]-------------------------#
+if ($type == 'memberJoined') {
+    $text = "เมื่อมีผู้ใช้เข้ากลุ่ม";
+        $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+elseif ($type == 'memberLeft') {
+    $text = "เมื่อมีผู้ใช้ออกกลุ่ม";
+        $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+elseif ($type == 'join') {
+      $text = "เมื่อบอทถูกเชิญเข้าห้อง";
+    $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+elseif ($type == 'leave') {
+    $text = "เมื่อบอทถูกเตะออกจากห้อง";
+        $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+elseif ($type == 'follow') {
+    $text = "เมื่อผู้ใช้กดติดตามบอท";
+    $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
+elseif ($type == 'unfollow') {
+    $text = "เมื่อบอทถูกบล็อค";
+        $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => $text
+            )
+        )
+    );
+}
 #-------------------------[MSG TYPE]-------------------------#
-if ($msg_type == 'image') {
+elseif ($msg_type == 'image') {
 $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 $headers = array('Authorization: Bearer ' . $channelAccessToken);
 $ch = curl_init($url);
