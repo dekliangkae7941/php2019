@@ -17,6 +17,11 @@ $profile    = $client->profil($userId);
 $repro = json_encode($profile);
 $messageid  = $client->parseEvents()[0]['message']['id'];
 $msg_type      = $client->parseEvents()[0]['message']['type'];
+
+$post_data      = $client->parseEvents()[0]['postback']['data'];
+
+
+
 $msg_file      = $client->parseEvents()[0]['message']['fileName'];
 $msg_message   = $client->parseEvents()[0]['message']['text'];
 $msg_title     = $client->parseEvents()[0]['message']['title'];
@@ -339,6 +344,35 @@ if ($command== 'myid') {
       'action' => array(
        'type' => 'postback',
        'label' => 'Postback',
+       'data' => 'happy'
+      )
+     )
+    )
+   )
+
+            )
+        )
+    );
+}
+
+
+
+
+elseif ($post_data== 'happy') { 
+
+  $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => 'userId ของคุณคือ '.$userId,
+'quickReply' => array(
+    'items' => array(
+     array(
+      'type' => 'action',
+      'action' => array(
+       'type' => 'postback',
+       'label' => 'Postback',
        'data' => 'สวัสดี'
       )
      )
@@ -349,6 +383,7 @@ if ($command== 'myid') {
         )
     );
 }
+
 
 else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
