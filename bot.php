@@ -139,7 +139,7 @@ $botDataUserFolder = './user/file/file/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
-$picurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
+$fileurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เรียบร้อยแล้ว";
       $mreply = array(
@@ -151,7 +151,7 @@ file_put_contents($fileFullSavePath,$result);
             ),
             array(
                 'type' => 'text',
-                'text' => $picurl
+                'text' => $fileurl
             )
         )
     );
