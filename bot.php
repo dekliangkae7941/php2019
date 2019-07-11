@@ -365,7 +365,7 @@ elseif ($post_data== 'happy') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => 'userId ของคุณคือ '.$userId,
+                'text' => 'Postback : happy',
 'quickReply' => array(
     'items' => array(
      array(
@@ -373,7 +373,7 @@ elseif ($post_data== 'happy') {
       'action' => array(
        'type' => 'postback',
        'label' => 'Postback',
-       'data' => 'สวัสดี'
+       'data' => 'happy'
       )
      )
     )
