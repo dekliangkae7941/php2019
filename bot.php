@@ -339,7 +339,7 @@ if ($command== 'myid') {
       'action' => array(
        'type' => 'postback',
        'label' => 'Postback',
-       'data' => 'action=buy&itemid=123'
+       'data' => 'สวัสดี'
       )
      )
     )
