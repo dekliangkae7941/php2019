@@ -331,7 +331,20 @@ if ($command== 'myid') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => 'userId ของคุณคือ '.$userId
+                'text' => 'userId ของคุณคือ '.$userId,
+'quickReply' => array(
+    'items' => array(
+     array(
+      'type' => 'action',
+      'action' => array(
+       'type' => 'postback',
+       'label' => 'Postback',
+       'data' => 'action=buy&itemid=123'
+      )
+     )
+    )
+   )
+
             )
         )
     );
