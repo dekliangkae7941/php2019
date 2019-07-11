@@ -331,7 +331,7 @@ if ($command== 'myid') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $userid
+                'text' => $userId
             )
         )
     );
