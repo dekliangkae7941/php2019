@@ -255,7 +255,21 @@ array(
     );
 }
 elseif ($msg_type == 'location') {
-      $text = "Reply location";
+
+    $uri = "https://api.openweathermap.org/data/2.5/weather?lat=" . $msg_latitude . "&lon=" . $msg_longitude . "&lang=th&units=metric&appid=bb32ab343bb6e3326f9e1bbd4e4f5d31";
+    $response = Unirest\Request::get("$uri");
+    $json = json_decode($response->raw_body, true);
+    $resulta = $json['name'];
+    $resultb = $json['weather'][0]['main'];
+    $resultc = $json['weather'][0]['description'];
+    $resultd = $json['main']['temp'];
+    $resulte = $json['coord']['lon'];
+
+    $text .= " พื้นที่ : " . $resulta . "\n";
+    $text .= " สภาพอากาศ : " . $resultb . "\n";
+    $text .= " รายละเอียด : " . $resultc . "\n";
+    $text .= " อุณหภูมิ : " . $resultd;
+
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
@@ -265,9 +279,13 @@ elseif ($msg_type == 'location') {
                 'address' => $msg_address,
                 'latitude' => $msg_latitude,
                 'longitude' => $msg_longitude
+            ),            array(
+                'type' => 'text',
+                'text' => $text
             )
         )
     );
+
 }
 else {
                     $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
