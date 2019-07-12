@@ -355,8 +355,19 @@ if ($command== 'myid') {
     );
 }
 
-
-
+elseif ($command== 'qr') { 
+      $url = 'https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl='.$options;
+      $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'image',
+                'originalContentUrl' => $url,
+                'previewImageUrl' => $url
+            )
+        )
+    );
+}
 
 elseif ($post_data== 'happy') { 
 
