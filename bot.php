@@ -28,6 +28,11 @@ $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
+funtuin notify(Request $request){
+        $getNoti = $request->all();
+        $a = $getNoti['type_id'];
+}
+
 #----Check title empty----#
 if (empty($msg_title)) {
     $msg_title = 'ตำแหน่งของคุณคือ ';
