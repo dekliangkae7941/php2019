@@ -3,9 +3,8 @@
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
 #-------------------------[Token]-------------------------#
-$channelAccessToken = 'pZmLfAv73zYnio19mFJo2hudRTgr7y8FbMdAayR7VXep+rZyVt1NAAEL+ZcsjfbrA7VhuzmpTUfkkYIIkgjdfohQ5bf8XV781/5J/gIy5vzhQPrIgSXQ3Uj23DnEpFiCa+MC60K2WexRcqsdgTDQ6gdB04t89/1O/w1cDnyilFU=
-'; 
-$channelSecret = 'ddfedb5ad9fad19c7c0bbe791cd28166';
+$channelAccessToken = 'oB+dxq4x/QW0LK5ChAdkW8lA/NB45OZBqL9esFEklV4HE+s0s/uYj87W/pFC8TVux4iE28au22uaTj7by26TAeG+yYwl4bgAvV4xam3djBZRhaC2iYxroQNVYYqyfv84hAsnHS8/Di9m6w7OP8LElQdB04t89/1O/w1cDnyilFU='; 
+$channelSecret = '53166c3cef8967db426b9328f1066bac';
 #-------------------------[Events]-------------------------#
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 $userId     = $client->parseEvents()[0]['source']['userId'];
@@ -31,7 +30,7 @@ $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
 #----Check title empty----#
 if (empty($msg_title)) {
-    $msg_title = 'ตำแหน่งของคุณคือ ';
+    $msg_title = 'ที่ไหนก็ได้ โตแล้ว';
 }
 #----command option----#
 $usertext = explode(" ", $message['text']);
@@ -145,7 +144,7 @@ $botDataUserFolder = './user/file/file/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
-$fileurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$fileurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เรียบร้อยแล้ว";
       $mreply = array(
@@ -178,7 +177,7 @@ $botDataUserFolder = './user/file/image/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
-$picurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$picurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์รูปภาพเรียบร้อยแล้ว";
       $mreply = array(
@@ -210,7 +209,7 @@ $botDataUserFolder = './user/file/video/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
-$vidurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$vidurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
       $mreply = array(
@@ -242,7 +241,7 @@ $botDataUserFolder = './user/file/audio/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
-$audurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$audurl = 'https://phpabc2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เสียงเรียบร้อยแล้ว";
       $mreply = array(
@@ -398,7 +397,7 @@ elseif ($post_data== 'happy') {
 
 
 else {
-                    $url = "https://bots.dialogflow.com/line/37d316a1-c0b5-46ca-9b85-e58789028d26/webhook";
+                    $url = "https://bots.dialogflow.com/line/246b595f-bd54-4a8f-9776-1ea50cc9b947/webhook";
                     $headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
                     file_put_contents('body.txt',file_get_contents('php://input'));
