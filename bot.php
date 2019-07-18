@@ -1,4 +1,12 @@
 <?php
+#-----------------------------------------------------------#
+        $host = "localhost"; // ชื่อ host หรือ ip ที่ใช้
+	$userhost = "root"; // ชื่อ user ที่ใช้ในการล็อกอิน
+	$passhost = "12345678"; // password ที่ใช้ในการล็อกอิน
+	$database = "chatbot"; // ชื่อ Database
+	mysql_connect($host,$userhost,$passhost); // connect to database
+	mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
+
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
