@@ -7,6 +7,9 @@
 	mysql_connect($host,$userhost,$passhost); // connect to database
 	mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
 
+
+
+
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
