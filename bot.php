@@ -1,15 +1,14 @@
 <?php
 #-----------------------------------------------------------#  
-// connect to database
-include('connect_db.php');	 
-date_default_timezone_set("Asia/Bangkok");
-$datef = date('Y-m-d');
-$json = file_get_contents('php://input');
-$request = json_decode($json, true);
-$queryText = $request['queryResult']['queryText'];
-$userId = $request['originalDetectIntentRequest']['payload']['data']['source']['userId'];
-$query = "INSERT INTO line_log(user_id,text,date_time) VALUE ('$userId','$queryText',NOW())";
-$resource = mysql_query($query) or die ("error".mysql_error());
+// connect to database 
+mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
+	$con = mysql_connect('127.0.0.1','root','');
+	if(!$con){
+		echo 'Not Connected To Server';
+	}
+	if(!mysqli_select_db($con,'chatbot')){
+		echo 'Database Not Select';
+	}
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
