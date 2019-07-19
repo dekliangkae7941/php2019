@@ -1,5 +1,14 @@
 <?php
-
+#-----------------------------------------------------------#     
+	 // connect to database
+	//mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
+	//$con = mysql_connect('127.0.0.1','root','');
+	//if(!$con){
+	//	echo 'Not Connected To Server';
+	//}
+	//if(!mysqli_select_db($con,'chatbot')){
+	//	echo 'Database Not Select';
+	//}
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
@@ -7,14 +16,6 @@ require_once('./unirest-php-master/src/Unirest.php');
 $channelAccessToken = 'pZmLfAv73zYnio19mFJo2hudRTgr7y8FbMdAayR7VXep+rZyVt1NAAEL+ZcsjfbrA7VhuzmpTUfkkYIIkgjdfohQ5bf8XV781/5J/gIy5vzhQPrIgSXQ3Uj23DnEpFiCa+MC60K2WexRcqsdgTDQ6gdB04t89/1O/w1cDnyilFU='; 
 $channelSecret = 'ddfedb5ad9fad19c7c0bbe791cd28166';
 #-------------------------[Events]-------------------------#
-    $Setup_Server = '127.0.0.1';
-    $Setup_User = 'root';
-    $Setup_Pwd = '123456';
-    $Setup_Database = 'chatbot';
-    mysql_connect($Setup_Server,$Setup_User,$Setup_Pwd);
-    mysql_query("chatbot $Setup_Database");
-    mysql_query("SET NAMES UTF8");
-#-----------------------------------------------------------#     
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 $userId     = $client->parseEvents()[0]['source']['userId'];
 $groupId    = $client->parseEvents()[0]['source']['groupId'];
@@ -114,7 +115,6 @@ elseif ($type == 'leave') {
     );
 }
 elseif ($type == 'follow') {
-    
     //$text = "เมื่อผู้ใช้กดติดตามบอท";
     $mreply = array(
         'replyToken' => $replyToken,
@@ -125,8 +125,6 @@ elseif ($type == 'follow') {
             )
         )
     );
-    $query = "INSERT INTO person (userId) VALUE ('$userId',NOW())";
-    $resource = mysql_query($query) or die ("error".mysql_error());
 }
 elseif ($type == 'unfollow') {
     $text = "เมื่อบอทถูกบล็อค";
