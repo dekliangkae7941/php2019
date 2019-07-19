@@ -2,13 +2,13 @@
 #-----------------------------------------------------------#     
 	 // connect to database
 	//mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
-	$con = mysql_connect('127.0.0.1','root','');
-	if(!$con){
-		echo 'Not Connected To Server';
-	}
-	if(!mysqli_select_db($con,'chatbot')){
-		echo 'Database Not Select';
-	}
+	//$con = mysql_connect('127.0.0.1','root','');
+	//if(!$con){
+	//	echo 'Not Connected To Server';
+	//}
+	//if(!mysqli_select_db($con,'chatbot')){
+	//	echo 'Database Not Select';
+	//}
 #-----------------------------------------------------------#
 
 
@@ -133,15 +133,7 @@ elseif ($type == 'follow') {
                 'text' => $text
             )
         )
-    	);
-	$userId = $_POST['userId'];
-	$sql = "INSERT INTO person (userID) VALUES ('userId')";
-	if(!mysqli_query($con,$sql)){
-		echo 'Not Insert';
-	}else{
-		echo 'Inserted';
-	}
-	
+    );	
 }
 elseif ($type == 'unfollow') {
     $text = "เมื่อบอทถูกบล็อค";
