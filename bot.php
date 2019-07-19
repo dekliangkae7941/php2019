@@ -115,13 +115,13 @@ elseif ($type == 'leave') {
     );
 }
 elseif ($type == 'follow') {
-    $text = "เมื่อผู้ใช้กดติดตามบอท";
+    //$text = "เมื่อผู้ใช้กดติดตามบอท";
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $text
+                'text' => 'userId ของคุณคือ '.$userId
             )
         )
     );
