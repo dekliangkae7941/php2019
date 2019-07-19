@@ -124,30 +124,16 @@ elseif ($type == 'leave') {
     );
 }
 elseif ($type == 'follow') {
-
     $text = "เมื่อผู้ใช้กดติดตามบอท";
 	$mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => 'userId ของคุณคือ '.$userId,
-		'quickReply' => array(
-		    'items' => array(
-		     array(
-		      'type' => 'action',
-		      'action' => array(
-		       'type' => 'postback',
-		       'label' => 'Postback',
-		       'data' => 'happy'
-		      )
-		     )
-		    )
-		   )
-
+                'text' => $text
             )
         )
-    );
+    	);
 	$userId = $_POST['userId'];
 	$sql = "INSERT INTO person (userID) VALUES ('userId')";
 	if(!mysqli_query($con,$sql)){
@@ -155,6 +141,7 @@ elseif ($type == 'follow') {
 	}else{
 		echo 'Inserted';
 	}
+	
 }
 elseif ($type == 'unfollow') {
     $text = "เมื่อบอทถูกบล็อค";
