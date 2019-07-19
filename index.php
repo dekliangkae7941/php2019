@@ -1,8 +1,7 @@
 <?php
 #-----------------------------------------------------------#  
 // connect to database 
-mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
-	$con = mysql_connect('127.0.0.1','root','');
+$con = mysql_connect('127.0.0.1','root','');
 	if(!$con){
 		echo 'Not Connected To Server';
 	}
@@ -62,7 +61,13 @@ $reline1 = json_decode($reline, true);
 $reline2 = $reline1['displayName'];
 
 
-
+$userId = $_POST['userId'];
+	$sql = "INSERT INTO person (userID) VALUES ('userId')";
+	if(!mysqli_query($con,$sql)){
+		echo 'Not Insert';
+	}else{
+		echo 'Inserted';
+    	}
 
 
 #-------------------------[EVENT TYPE]-------------------------#
