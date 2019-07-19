@@ -9,10 +9,6 @@
 	//if(!mysqli_select_db($con,'chatbot')){
 	//	echo 'Database Not Select';
 	//}
-#-----------------------------------------------------------#
-
-
-
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
@@ -42,14 +38,9 @@ $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
-funtuin notify(Request $request){
-        $getNoti = $request->all();
-        $a = $getNoti['type_id'];
-}
-
 #----Check title empty----#
 if (empty($msg_title)) {
-    $msg_title = 'ตำแหน่งของคุณคือ ';
+    $msg_title = 'ที่ไหนก็ได้ โตแล้ว';
 }
 #----command option----#
 $usertext = explode(" ", $message['text']);
@@ -163,7 +154,7 @@ $botDataUserFolder = './user/file/file/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
-$fileurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
+$fileurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เรียบร้อยแล้ว";
       $mreply = array(
@@ -196,7 +187,7 @@ $botDataUserFolder = './user/file/image/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
-$picurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
+$picurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์รูปภาพเรียบร้อยแล้ว";
       $mreply = array(
@@ -228,7 +219,7 @@ $botDataUserFolder = './user/file/video/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
-$vidurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
+$vidurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
       $mreply = array(
@@ -260,7 +251,7 @@ $botDataUserFolder = './user/file/audio/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
-$audurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
+$audurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เสียงเรียบร้อยแล้ว";
       $mreply = array(
@@ -346,109 +337,105 @@ elseif ($msg_type == 'location') {
 
 }
 
-////////////////////////
-
 else { 
-    //
-    if ($command== 'myid') { 
-    $mreply = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => 'userId ของคุณคือ '.$userId,
-                    'quickReply' => array(
-                        'items' => array(
-                        array(
-                        'type' => 'action',
-                        'action' => array(
-                        'type' => 'postback',
-                        'label' => 'Postback',
-                        'data' => 'happy'
-                        )
-                        )
-                        )
-                    )
 
-                )
+if ($command== 'myid') { 
+
+  $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => 'userId ของคุณคือ '.$userId,
+'quickReply' => array(
+    'items' => array(
+     array(
+      'type' => 'action',
+      'action' => array(
+       'type' => 'postback',
+       'label' => 'Postback',
+       'data' => 'happy'
+      )
+     )
+    )
+   )
+
             )
-        );
-    }
-    /////
-    elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
+        )
+    );
+}
+
+elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
       $url = 'https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl='.$options;
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
-		    array(
-			'type' => 'image',
-			'originalContentUrl' => $url,
-			'previewImageUrl' => $url
-		    )
-		)
-	    );
-     }
-    /////////////
-    elseif ($post_data== 'happy') { 
-
-    $mreply = array(
-            'replyToken' => $replyToken,
-            'messages' => array(
-                array(
-                    'type' => 'text',
-                    'text' => 'Postback : happy',
-                    'quickReply' => array(
-                        'items' => array(
-                        array(
-                        'type' => 'action',
-                        'action' => array(
-                        'type' => 'postback',
-                        'label' => 'Postback',
-                        'data' => 'happy'
-                        )
-                        )
-                        )
-                    )
-
-                )
+            array(
+                'type' => 'image',
+                'originalContentUrl' => $url,
+                'previewImageUrl' => $url
             )
-        );
-    }
-    /////////
-    else {
-                        $url = "https://bots.dialogflow.com/line/37d316a1-c0b5-46ca-9b85-e58789028d26/webhook";
-                        $headers = getallheaders();
-                        file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
-                        file_put_contents('body.txt',file_get_contents('php://input'));
-                        $headers['Host'] = "bots.dialogflow.com";
-                        $json_headers = array();
-                        foreach($headers as $k=>$v){
-                            $json_headers[]=$k.":".$v;
-                        }
-                        $inputJSON = file_get_contents('php://input');
-                        $ch = curl_init();
-                        curl_setopt( $ch, CURLOPT_URL, $url);
-                        curl_setopt( $ch, CURLOPT_POST, 1);
-                        curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true);
-                        curl_setopt( $ch, CURLOPT_POSTFIELDS, $inputJSON);
-                        curl_setopt( $ch, CURLOPT_HTTPHEADER, $json_headers);
-                        curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2);
-                        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1); 
-                        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-                        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-                        $result = curl_exec( $ch );
-                        curl_close( $ch );
-    }
-    //////////////////
+        )
+    );
 }
-//////////////////
+
+elseif ($post_data== 'happy') { 
+
+  $mreply = array(
+        'replyToken' => $replyToken,
+        'messages' => array(
+            array(
+                'type' => 'text',
+                'text' => 'Postback : happy',
+'quickReply' => array(
+    'items' => array(
+     array(
+      'type' => 'action',
+      'action' => array(
+       'type' => 'postback',
+       'label' => 'Postback',
+       'data' => 'happy'
+      )
+     )
+    )
+   )
+
+            )
+        )
+    );
+}
+
+
+else {
+                    $url = "https://bots.dialogflow.com/line/37d316a1-c0b5-46ca-9b85-e58789028d26/webhook";
+                    $headers = getallheaders();
+                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
+                    file_put_contents('body.txt',file_get_contents('php://input'));
+                    $headers['Host'] = "bots.dialogflow.com";
+                    $json_headers = array();
+                    foreach($headers as $k=>$v){
+                        $json_headers[]=$k.":".$v;
+                    }
+                    $inputJSON = file_get_contents('php://input');
+                    $ch = curl_init();
+                    curl_setopt( $ch, CURLOPT_URL, $url);
+                    curl_setopt( $ch, CURLOPT_POST, 1);
+                    curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true);
+                    curl_setopt( $ch, CURLOPT_POSTFIELDS, $inputJSON);
+                    curl_setopt( $ch, CURLOPT_HTTPHEADER, $json_headers);
+                    curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2);
+                    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1); 
+                    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+                    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+                    $result = curl_exec( $ch );
+                    curl_close( $ch );
+}
+}
 if (isset($mreply)) {
     $result = json_encode($mreply);
     $client->replyMessage($mreply);
-}
-//////////////  
+}  
     file_put_contents('log.txt',file_get_contents('php://input'));
 ?>
 
-    
-
+   
