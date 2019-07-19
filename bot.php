@@ -1,6 +1,6 @@
 <?php
 #-----------------------------------------------------------#     
-include(‘conect_db.php’);
+
 date_default_timezone_set(“Asia/Bangkok”);
 $datef = date(‘Y-m-d’);
 $json = file_get_contents(‘php://input’);
