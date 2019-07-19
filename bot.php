@@ -1,12 +1,15 @@
 <?php
+#-----------------------------------------------------------#     
+	 // connect to database
+	//mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
+	$con = mysql_connect('127.0.0.1','root','');
+	if(!$con){
+		echo 'Not Connected To Server';
+	}
+	if(!mysqli_select_db($con,'chatbot')){
+		echo 'Database Not Select';
+	}
 #-----------------------------------------------------------#
-        $host = "localhost"; // ชื่อ host หรือ ip ที่ใช้
-	$userhost = "root"; // ชื่อ user ที่ใช้ในการล็อกอิน
-	$passhost = "12345678"; // password ที่ใช้ในการล็อกอิน
-	$database = "chatbot"; // ชื่อ Database
-	mysql_connect($host,$userhost,$passhost); // connect to database
-	mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
-
 
 
 
@@ -121,16 +124,37 @@ elseif ($type == 'leave') {
     );
 }
 elseif ($type == 'follow') {
+
     $text = "เมื่อผู้ใช้กดติดตามบอท";
-    $mreply = array(
+	$mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $text
+                'text' => 'userId ของคุณคือ '.$userId,
+		'quickReply' => array(
+		    'items' => array(
+		     array(
+		      'type' => 'action',
+		      'action' => array(
+		       'type' => 'postback',
+		       'label' => 'Postback',
+		       'data' => 'happy'
+		      )
+		     )
+		    )
+		   )
+
             )
         )
     );
+	$userId = $_POST['userId'];
+	$sql = "INSERT INTO person (userID) VALUES ('userId')";
+	if(!mysqli_query($con,$sql)){
+		echo 'Not Insert';
+	}else{
+		echo 'Inserted';
+	}
 }
 elseif ($type == 'unfollow') {
     $text = "เมื่อบอทถูกบล็อค";
