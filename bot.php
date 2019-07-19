@@ -125,7 +125,7 @@ elseif ($type == 'leave') {
 }
 elseif ($type == 'follow') {
     $text = "เมื่อผู้ใช้กดติดตามบอท";
-	$mreply = array(
+    $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
@@ -133,7 +133,7 @@ elseif ($type == 'follow') {
                 'text' => $text
             )
         )
-    );	
+    );
 }
 elseif ($type == 'unfollow') {
     $text = "เมื่อบอทถูกบล็อค";
@@ -346,104 +346,107 @@ elseif ($msg_type == 'location') {
 
 }
 
+////////////////////////
+
 else { 
+    //
+    if ($command== 'myid') { 
+    $mreply = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => 'userId ของคุณคือ '.$userId,
+                    'quickReply' => array(
+                        'items' => array(
+                        array(
+                        'type' => 'action',
+                        'action' => array(
+                        'type' => 'postback',
+                        'label' => 'Postback',
+                        'data' => 'happy'
+                        )
+                        )
+                        )
+                    )
 
-if ($command== 'myid') { 
-
-  $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
-                'type' => 'text',
-                'text' => 'userId ของคุณคือ '.$userId,
-'quickReply' => array(
-    'items' => array(
-     array(
-      'type' => 'action',
-      'action' => array(
-       'type' => 'postback',
-       'label' => 'Postback',
-       'data' => 'happy'
-      )
-     )
-    )
-   )
-
+                )
             )
-        )
-    );
-}
-
-elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
+        );
+    }
+    /////
+    elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
       $url = 'https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl='.$options;
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
-            array(
-                'type' => 'image',
-                'originalContentUrl' => $url,
-                'previewImageUrl' => $url
+		    array(
+			'type' => 'image',
+			'originalContentUrl' => $url,
+			'previewImageUrl' => $url
+		    )
+		)
+	    );
+     }
+    /////////////
+    elseif ($post_data== 'happy') { 
+
+    $mreply = array(
+            'replyToken' => $replyToken,
+            'messages' => array(
+                array(
+                    'type' => 'text',
+                    'text' => 'Postback : happy',
+                    'quickReply' => array(
+                        'items' => array(
+                        array(
+                        'type' => 'action',
+                        'action' => array(
+                        'type' => 'postback',
+                        'label' => 'Postback',
+                        'data' => 'happy'
+                        )
+                        )
+                        )
+                    )
+
+                )
             )
-        )
-    );
+        );
+    }
+    /////////
+    else {
+                        $url = "https://bots.dialogflow.com/line/37d316a1-c0b5-46ca-9b85-e58789028d26/webhook";
+                        $headers = getallheaders();
+                        file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
+                        file_put_contents('body.txt',file_get_contents('php://input'));
+                        $headers['Host'] = "bots.dialogflow.com";
+                        $json_headers = array();
+                        foreach($headers as $k=>$v){
+                            $json_headers[]=$k.":".$v;
+                        }
+                        $inputJSON = file_get_contents('php://input');
+                        $ch = curl_init();
+                        curl_setopt( $ch, CURLOPT_URL, $url);
+                        curl_setopt( $ch, CURLOPT_POST, 1);
+                        curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true);
+                        curl_setopt( $ch, CURLOPT_POSTFIELDS, $inputJSON);
+                        curl_setopt( $ch, CURLOPT_HTTPHEADER, $json_headers);
+                        curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2);
+                        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1); 
+                        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+                        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+                        $result = curl_exec( $ch );
+                        curl_close( $ch );
+    }
+    //////////////////
 }
-
-elseif ($post_data== 'happy') { 
-
-  $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
-                'type' => 'text',
-                'text' => 'Postback : happy',
-'quickReply' => array(
-    'items' => array(
-     array(
-      'type' => 'action',
-      'action' => array(
-       'type' => 'postback',
-       'label' => 'Postback',
-       'data' => 'happy'
-      )
-     )
-    )
-   )
-
-            )
-        )
-    );
-}
-
-
-else {
-                    $url = "https://bots.dialogflow.com/line/37d316a1-c0b5-46ca-9b85-e58789028d26/webhook";
-                    $headers = getallheaders();
-                    file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
-                    file_put_contents('body.txt',file_get_contents('php://input'));
-                    $headers['Host'] = "bots.dialogflow.com";
-                    $json_headers = array();
-                    foreach($headers as $k=>$v){
-                        $json_headers[]=$k.":".$v;
-                    }
-                    $inputJSON = file_get_contents('php://input');
-                    $ch = curl_init();
-                    curl_setopt( $ch, CURLOPT_URL, $url);
-                    curl_setopt( $ch, CURLOPT_POST, 1);
-                    curl_setopt( $ch, CURLOPT_BINARYTRANSFER, true);
-                    curl_setopt( $ch, CURLOPT_POSTFIELDS, $inputJSON);
-                    curl_setopt( $ch, CURLOPT_HTTPHEADER, $json_headers);
-                    curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 2);
-                    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 1); 
-                    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-                    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-                    $result = curl_exec( $ch );
-                    curl_close( $ch );
-}
-}
+//////////////////
 if (isset($mreply)) {
     $result = json_encode($mreply);
     $client->replyMessage($mreply);
-}  
+}
+//////////////  
     file_put_contents('log.txt',file_get_contents('php://input'));
 ?>
 
