@@ -1,14 +1,15 @@
 <?php
-#-----------------------------------------------------------#     
+#-----------------------------------------------------------#  
+include('connect_db.php');
 	 // connect to database
-	//mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
-	//$con = mysql_connect('127.0.0.1','root','');
-	//if(!$con){
-	//	echo 'Not Connected To Server';
-	//}
-	//if(!mysqli_select_db($con,'chatbot')){
-	//	echo 'Database Not Select';
-	//}
+	mysql_query("chatbot $database"); // เลือกฐานข้อมูลที่ใช้
+	$con = mysql_connect('127.0.0.1','root','');
+	if(!$con){
+		echo 'Not Connected To Server';
+	}
+	if(!mysqli_select_db($con,'chatbot')){
+		echo 'Database Not Select';
+	}
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
