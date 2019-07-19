@@ -7,14 +7,6 @@
     mysql_connect($Setup_Server,$Setup_User,$Setup_Pwd);
     mysql_query("chatbot $Setup_Database");
     mysql_query("SET NAMES UTF8");
-date_default_timezone_set(“Asia/Bangkok”);
-$datef = date(‘Y-m-d’);
-$json = file_get_contents(‘php://input’);
-$request = json_decode($json, true);
-$queryText = $request[“queryResult”][“queryText”];
-$userId = $request[‘originalDetectIntentRequest’][‘payload’][‘data’][‘source’][‘userId’];
-$query = “INSERT INTO line_log(user_id,text,date_time) VALUE (‘$userId’,’$queryText’,NOW())”;
-$resource = mysql_query($query) or die (“error”.mysql_error());
 #-------------------------[Include]-------------------------#
 require_once('./include/line_class.php');
 require_once('./unirest-php-master/src/Unirest.php');
@@ -121,6 +113,8 @@ elseif ($type == 'leave') {
     );
 }
 elseif ($type == 'follow') {
+    $query = “INSERT INTO person(userId) VALUE (‘$userId’,NOW())”;
+    $resource = mysql_query($query) or die (“error”.mysql_error());
     //$text = "เมื่อผู้ใช้กดติดตามบอท";
     $mreply = array(
         'replyToken' => $replyToken,
