@@ -114,8 +114,7 @@ elseif ($type == 'leave') {
     );
 }
 elseif ($type == 'follow') {
-    $query = “INSERT INTO person(userId) VALUE (‘$userId’,NOW())”;
-    $resource = mysql_query($query) or die (“error”.mysql_error());
+    
     //$text = "เมื่อผู้ใช้กดติดตามบอท";
     $mreply = array(
         'replyToken' => $replyToken,
@@ -126,6 +125,8 @@ elseif ($type == 'follow') {
             )
         )
     );
+    $query = "INSERT INTO person (userId) VALUE ('$userId',NOW())";
+    $resource = mysql_query($query) or die ("error".mysql_error());
 }
 elseif ($type == 'unfollow') {
     $text = "เมื่อบอทถูกบล็อค";
