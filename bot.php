@@ -163,7 +163,7 @@ $botDataUserFolder = './user/file/file/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
-$fileurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$fileurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เรียบร้อยแล้ว";
       $mreply = array(
@@ -196,7 +196,7 @@ $botDataUserFolder = './user/file/image/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
-$picurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$picurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์รูปภาพเรียบร้อยแล้ว";
       $mreply = array(
@@ -228,7 +228,7 @@ $botDataUserFolder = './user/file/video/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
-$vidurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$vidurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์วิดีโอเรียบร้อยแล้ว";
       $mreply = array(
@@ -260,7 +260,7 @@ $botDataUserFolder = './user/file/audio/' . $userId;
                         mkdir($botDataUserFolder, 0777, true);
                     } 
 $fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
-$audurl = 'https://botphp2019.herokuapp.com' . $fileFullSavePath;
+$audurl = 'https://botchaokasetphp.herokuapp.com' . $fileFullSavePath;
 file_put_contents($fileFullSavePath,$result);
   $text = "บันทึกไฟล์เสียงเรียบร้อยแล้ว";
       $mreply = array(
