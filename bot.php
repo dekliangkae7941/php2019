@@ -1,6 +1,12 @@
 <?php
 #-----------------------------------------------------------#     
-
+    $Setup_Server = '127.0.0.1';
+    $Setup_User = 'root';
+    $Setup_Pwd = '';
+    $Setup_Database = 'chatbot';
+    mysql_connect($Setup_Server,$Setup_User,$Setup_Pwd);
+    mysql_query("chatbot $Setup_Database");
+    mysql_query("SET NAMES UTF8");
 date_default_timezone_set(“Asia/Bangkok”);
 $datef = date(‘Y-m-d’);
 $json = file_get_contents(‘php://input’);
